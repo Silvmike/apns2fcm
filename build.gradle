@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+group 'ru.hardcoders.apns2fcm'
+
+repositories {
+
+  mavenLocal();
+  mavenCentral();
+
+}
+
+dependencies {
+
+  compile 'org.springframework:spring-webflux:5.0.2.RELEASE'
+  compile 'io.projectreactor.ipc:reactor-netty:0.7.3.RELEASE'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.9.4'
+
+}
+
+jar {
+
+  archiveName "apns2fcm.jar"
+
+  manifest {
+    attributes "Main-Class": "ru.hardcoders.apns2fcm.Apns2Fcm"
+  }
+
+  from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+  }
+
+}
