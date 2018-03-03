@@ -126,7 +126,7 @@ public class Apns2Fcm {
             public void run() {
                 try {
                     Files.lines(Paths.get(fileName)).forEach((line) -> {
-                        processor.onNext(line);
+                        processor.onNext(line.toLowerCase() /* seems that case matters (upper-cased hex push id receive other FCM tokens) */);
                     });
                     processor.onComplete();
                 } catch (IOException e) {
